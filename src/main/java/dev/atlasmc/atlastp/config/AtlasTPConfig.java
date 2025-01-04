@@ -31,6 +31,16 @@ public class AtlasTPConfig {
     private int version = 0;
 
     /**
+     * Contains the translation strings for various messages sent to players by the plugin.
+     * <p>
+     * This field encapsulates all the customizable messages that are displayed to players.
+     * It supports placeholders such as {@code <executor>}, {@code <toplayer>}, and {@code <fromplayer>},
+     * which are dynamically replaced during runtime based on the command context.
+     */
+    @Comment("The different translation strings for player messages.")
+    private @NonNull TranslationStrings translationStrings = new TranslationStrings();
+
+    /**
      * Retrieves the current configuration version.
      *
      * @return the version of the configuration.
@@ -46,5 +56,35 @@ public class AtlasTPConfig {
      */
     public void version(final int version) {
         this.version = version;
+    }
+
+    /**
+     * Retrieves the translation strings for player messages.
+     *
+     * @return the {@link TranslationStrings} object containing message templates.
+     */
+    public TranslationStrings translationStrings() {
+        return this.translationStrings;
+    }
+
+    /**
+     * Sets the translation strings for player messages.
+     *
+     * @param translationStrings the {@link TranslationStrings} object to set.
+     * @throws NullPointerException if {@code translationStrings} is {@code null}.
+     */
+    public void translationStrings(final @NonNull TranslationStrings translationStrings) {
+        this.translationStrings = translationStrings;
+    }
+
+    /**
+     * A nested class that defines customizable messages sent to players.
+     * <p>
+     * This class allows server administrators to configure the language and format
+     * of messages displayed to players during teleportation commands.
+     */
+    @ConfigSerializable
+    public static class TranslationStrings {
+
     }
 }
