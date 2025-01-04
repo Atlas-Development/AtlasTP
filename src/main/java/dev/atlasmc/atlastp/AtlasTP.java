@@ -1,11 +1,13 @@
 package dev.atlasmc.atlastp;
 
 import com.google.inject.Inject;
+import dev.atlasmc.atlastp.commands.TPCommand;
 import dev.atlasmc.atlastp.config.AtlasTPConfig;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.api.Server;
 import org.spongepowered.api.command.Command;
 import org.spongepowered.api.config.DefaultConfig;
+import org.spongepowered.api.entity.living.player.server.ServerPlayer;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.lifecycle.ConstructPluginEvent;
 import org.spongepowered.api.event.lifecycle.RegisterCommandEvent;
@@ -65,7 +67,18 @@ public class AtlasTP {
 
     @Listener
     public void onRegisterCommands(final RegisterCommandEvent<Command.Parameterized> event) {
-        // Register a simple command
+        logger.info("Initializing commands");
+
         // When possible, all commands should be registered within a command register event
+        event.register(
+                this.container,
+                Command.builder()
+                    .addParameters(TPCommand.getFirstParam(), TPCommand.getSecondParam())
+                    .executionRequirements(context -> context.cause().root() instanceof ServerPlayer)
+                    .permission("atlastp.command.tp")
+                    .executor(new TPCommand(logger, config.get())).build(),
+                "tp",
+                "teleport"
+        );
     }
 }

@@ -86,5 +86,113 @@ public class AtlasTPConfig {
     @ConfigSerializable
     public static class TranslationStrings {
 
+        /**
+         * The message displayed when a player uses {@code /tp <player>}.
+         * <p>
+         * Placeholders:
+         * <ul>
+         *   <li>{@code <executor>} - Name of the player who executed the command.</li>
+         *   <li>{@code <toplayer>} - Name of the player being teleported to.</li>
+         * </ul>
+         */
+        @Comment("""
+                Message for /tp <player>.
+                
+                Allows for <executor> (Name of player that send the tp command)
+                and <toplayer> (Name of the player that was teleported to)
+                """)
+        private String tpToMessage = "Teleporting you to <toplayer>.";
+
+        /**
+         * The message displayed when a player uses {@code /tp <fromplayer> <toplayer>}.
+         * <p>
+         * Placeholders:
+         * <ul>
+         *   <li>{@code <executor>} - Name of the player who executed the command.</li>
+         *   <li>{@code <fromplayer>} - Name of the player being teleported.</li>
+         *   <li>{@code <toplayer>} - Name of the target player being teleported to.</li>
+         * </ul>
+         */
+        @Comment("""
+                Message for /tp <fromplayer> <toplayer>
+                
+                Allows for <executor> (Name of player that send the tp command),
+                <fromplayer> (Name of the player that is being teleported)
+                and <toplayer> (Name of the player that is being teleported to)
+                """)
+        private String tpOtherMessage = "Teleporting <fromplayer> to <toplayer>";
+
+        /**
+         * The message sent to the player being teleported via {@code /tp <fromplayer> <toplayer>}.
+         * <p>
+         * Placeholders:
+         * <ul>
+         *   <li>{@code <executor>} - Name of the player who executed the command.</li>
+         *   <li>{@code <fromplayer>} - Name of the player being teleported.</li>
+         *   <li>{@code <toplayer>} - Name of the target player being teleported to.</li>
+         * </ul>
+         */
+        @Comment("""
+                Message to the player that is being teleported by /tp <fromplayer> <toplayer>.
+                
+                Allows for <executor> (Name of player that send the tp command),
+                <fromplayer> (Name of the player that is being teleported)
+                and <toplayer> (Name of the player that is being teleported to)
+                """)
+        private String beingTeleportedToMessage = "You were teleported to <toplayer> by <executor>";
+
+        /**
+         * Retrieves the message for {@code /tp <player>}.
+         *
+         * @return the teleport-to message template.
+         */
+        public String tpToMessage() {
+            return this.tpToMessage;
+        }
+
+        /**
+         * Sets the message for {@code /tp <player>}.
+         *
+         * @param tpToMessage the message template to set.
+         */
+        public void tpToMessage(final String tpToMessage) {
+            this.tpToMessage = tpToMessage;
+        }
+
+        /**
+         * Retrieves the message for {@code /tp <fromplayer> <toplayer>}.
+         *
+         * @return the teleport-other message template.
+         */
+        public String tpOtherMessage() {
+            return this.tpOtherMessage;
+        }
+
+        /**
+         * Sets the message for {@code /tp <fromplayer> <toplayer>}.
+         *
+         * @param tpOtherMessage the message template to set.
+         */
+        public void tpOtherMessage(final String tpOtherMessage) {
+            this.tpOtherMessage = tpOtherMessage;
+        }
+
+        /**
+         * Retrieves the message sent to a player being teleported by another player.
+         *
+         * @return the message template for being teleported.
+         */
+        public String beingTeleportedToMessage() {
+            return this.beingTeleportedToMessage;
+        }
+
+        /**
+         * Sets the message sent to a player being teleported by another player.
+         *
+         * @param beingTeleportedToMessage the message template to set.
+         */
+        public void beingTeleportedToMessage(final String beingTeleportedToMessage) {
+            this.beingTeleportedToMessage = beingTeleportedToMessage;
+        }
     }
 }
