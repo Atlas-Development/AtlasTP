@@ -73,6 +73,14 @@ public class TPCommand implements CommandExecutor {
         final ServerPlayer player = (ServerPlayer) context.cause().root();
         final ServerPlayer toPlayer = context.requireOne(firstParam);
 
+        if(player.equals(toPlayer)) {
+            context.sendMessage(MiniMessage.miniMessage().deserialize(
+                    config.translationStrings().tpaToSelf(),
+                    Placeholder.component("player", player.displayName().get())
+            ));
+            return CommandResult.success();
+        }
+
         // Teleport the executing player to the target player
         player.user().setLocation(toPlayer.world().key(), toPlayer.position());
 
@@ -98,6 +106,14 @@ public class TPCommand implements CommandExecutor {
     private CommandResult executeTwoPlayers(final CommandContext context) throws CommandException {
         final ServerPlayer player = context.requireOne(firstParam);
         final ServerPlayer toPlayer = context.requireOne(secondParam);
+
+        if(player.equals(toPlayer)) {
+            context.sendMessage(MiniMessage.miniMessage().deserialize(
+                    config.translationStrings().tpOtherToThemselves(),
+                    Placeholder.component("player", player.displayName().get())
+            ));
+            return CommandResult.success();
+        }
 
         // Teleport the player to the target player
         player.user().setLocation(toPlayer.world().key(), toPlayer.position());

@@ -141,6 +141,19 @@ public class AtlasTPConfig {
                 """)
         private String beingTeleportedToMessage = "You were teleported to <toplayer> by <executor>";
 
+        @Comment("""
+                Message to the player if they try to teleport to themselves with the /tp command.
+                
+                Allows for <player> (Name of the player that is being teleported)
+                """)
+        private String tpToSelf = "You cannot teleport to yourself! Try teleporting to someone else.";
+
+        @Comment("""
+                Message to the player if they try to teleport another player to themselves with the /tp <player> <player> command.
+                
+                Allows for <player> (Name of the player that is being teleported)
+                """)
+        private String tpOtherToThemselves = "You cannot teleport the player <player> to themselves.";
         /**
          * Retrieves the message for {@code /tp <player>}.
          *
@@ -193,6 +206,42 @@ public class AtlasTPConfig {
          */
         public void beingTeleportedToMessage(final String beingTeleportedToMessage) {
             this.beingTeleportedToMessage = beingTeleportedToMessage;
+        }
+
+        /**
+         * Retrieves the error message sent to a player if they want to teleport to themselves.
+         *
+         * @return the error message template
+         */
+        public String tpToSelf() {
+            return this.tpToSelf;
+        }
+
+        /**
+         * Sets the error message sent to a player if they want to teleport to themselves.
+         *
+         * @param tpToSelf the error message template
+         */
+        public void tpToSelf(final String tpToSelf) {
+            this.tpToSelf = tpToSelf;
+        }
+
+        /**
+         * Retrieves the error message sent to a player if they want to teleport another player to themselves.
+         *
+         * @return the error message template
+         */
+        public String tpOtherToThemselves() {
+            return this.tpOtherToThemselves;
+        }
+
+        /**
+         * Sets the error message sent to a player if they want to teleport another player to themselves.
+         *
+         * @param tpOtherToThemselves the error message template
+         */
+        public void tpOtherToThemselves(final String tpOtherToThemselves) {
+            this.tpOtherToThemselves = tpOtherToThemselves;
         }
     }
 }
