@@ -154,6 +154,83 @@ public class AtlasTPConfig {
                 Allows for <player> (Name of the player that is being teleported)
                 """)
         private String tpOtherToThemselves = "You cannot teleport the player <player> to themselves.";
+
+        @Comment("Message to the player if they try to send a teleport request to themselves with the /tpa command.")
+        private String tpaToSelf = "You can't send a teleport request to yourself! Try sending a request to someone else.";
+
+        @Comment("""
+                Message to the player that sends the TPA request.
+                
+                Allows for <fromplayer> (Name of the player that sends the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String tpaSendMessage = "Sending teleport request to <toplayer>.";
+
+        @Comment("""
+                Message to the player that receives the TPA request.
+                
+                Allows for <fromplayer> (Name of the player that has sent the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String tpaReceiveMessage = "You got a teleport request from <fromplayer>.\n" +
+                "To accept, type /tpaccept <fromplayer> and to reject, type /tpdeny <fromplayer>.";
+
+        @Comment("""
+                Message to the sender when the teleport request expires.
+                
+                Allows for <fromplayer> (Name of the player that has sent the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String tpaExpireSender = "Your teleport request to <toplayer> has expired.";
+
+        @Comment("""
+                Message to the receiver when the teleport request expires.
+                
+                Allows for <fromplayer> (Name of the player that has sent the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String tpaExpireReceiver = "The teleport request from <fromplayer> has expired.";
+
+        @Comment("""
+                Message to the receiver when the teleport request expires.
+                
+                Allows for <fromplayer> (Name of the player that has sent the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String noOpenTPARequest = "There is no open TPA request for <fromplayer>.";
+
+        @Comment("""
+                Message to the sender when the teleport request was accepted.
+                
+                Allows for <fromplayer> (Name of the player that has sent the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String tpaAcceptSender = "Your TPA request to <toplayer> was accepted.";
+
+        @Comment("""
+                Message to the receiver when the teleport request was accepted.
+                
+                Allows for <fromplayer> (Name of the player that has sent the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String tpaAcceptReceiver = "You accepted the TPA request from <fromplayer>.";
+
+        @Comment("""
+                Message to the sender when the teleport request was declined.
+                
+                Allows for <fromplayer> (Name of the player that has sent the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String tpaDeclineSender = "Your TPA request to <toplayer> was declined.";
+
+        @Comment("""
+                Message to the receiver when the teleport request was declined.
+                
+                Allows for <fromplayer> (Name of the player that has sent the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String tpaDeclineReceiver = "You declined the TPA request from <fromplayer>.";
+
         /**
          * Retrieves the message for {@code /tp <player>}.
          *
@@ -242,6 +319,186 @@ public class AtlasTPConfig {
          */
         public void tpOtherToThemselves(final String tpOtherToThemselves) {
             this.tpOtherToThemselves = tpOtherToThemselves;
+        }
+
+        /**
+         * Retrieves the error message sent to a player if they try to send a teleport request to themselves.
+         *
+         * @return the error message template.
+         */
+        public String tpaToSelf() {
+            return this.tpaToSelf;
+        }
+
+        /**
+         * Sets the error message sent to a player if they try to send a teleport request to themselves.
+         *
+         * @param tpaToSelf the error message template.
+         */
+        public void tpaToSelf(final String tpaToSelf) {
+            this.tpaToSelf = tpaToSelf;
+        }
+
+        /**
+         * Retrieves the message sent to the sender when they send a TPA request.
+         *
+         * @return the TPA send message template.
+         */
+        public String tpaSendMessage() {
+            return this.tpaSendMessage;
+        }
+
+        /**
+         * Sets the message sent to the sender when they send a TPA request.
+         *
+         * @param tpaSendMessage the TPA send message template.
+         */
+        public void tpaSendMessage(final String tpaSendMessage) {
+            this.tpaSendMessage = tpaSendMessage;
+        }
+
+        /**
+         * Retrieves the message sent to the receiver when they receive a TPA request.
+         *
+         * @return the TPA receive message template.
+         */
+        public String tpaReceiveMessage() {
+            return this.tpaReceiveMessage;
+        }
+
+        /**
+         * Sets the message sent to the receiver when they receive a TPA request.
+         *
+         * @param tpaReceiveMessage the TPA receive message template.
+         */
+        public void tpaReceiveMessage(final String tpaReceiveMessage) {
+            this.tpaReceiveMessage = tpaReceiveMessage;
+        }
+
+        /**
+         * Retrieves the message sent to the sender when the TPA request expires.
+         *
+         * @return the TPA expire sender message template.
+         */
+        public String tpaExpireSender() {
+            return this.tpaExpireSender;
+        }
+
+        /**
+         * Sets the message sent to the sender when the TPA request expires.
+         *
+         * @param tpaTimeoutSender the TPA expire sender message template.
+         */
+        public void tpaExpireSender(final String tpaTimeoutSender) {
+            this.tpaExpireSender = tpaTimeoutSender;
+        }
+
+        /**
+         * Retrieves the message sent to the receiver when the TPA request expires.
+         *
+         * @return the TPA expire receiver message template.
+         */
+        public String tpaExpireReceiver() {
+            return this.tpaExpireReceiver;
+        }
+
+        /**
+         * Sets the message sent to the receiver when the TPA request expires.
+         *
+         * @param tpaTimeoutReceiver the TPA expire receiver message template.
+         */
+        public void tpaExpireReceiver(final String tpaTimeoutReceiver) {
+            this.tpaExpireReceiver = tpaTimeoutReceiver;
+        }
+
+        /**
+         * Retrieves the message sent to the player if no open TPA request is found.
+         *
+         * @return the no open TPA request message template.
+         */
+        public String noOpenTPARequest() {
+            return this.noOpenTPARequest;
+        }
+
+        /**
+         * Sets the message sent to the player if no open TPA request is found.
+         *
+         * @param noOpenTPARequest the no open TPA request message template.
+         */
+        public void noOpenTPARequest(final String noOpenTPARequest) {
+            this.noOpenTPARequest = noOpenTPARequest;
+        }
+
+        /**
+         * Retrieves the message sent to the sender when their TPA request is accepted.
+         *
+         * @return the TPA accept sender message template.
+         */
+        public String tpaAcceptSender() {
+            return this.tpaAcceptSender;
+        }
+
+        /**
+         * Sets the message sent to the sender when their TPA request is accepted.
+         *
+         * @param tpaAcceptSender the TPA accept sender message template.
+         */
+        public void tpaAcceptSender(final String tpaAcceptSender) {
+            this.tpaAcceptSender = tpaAcceptSender;
+        }
+
+        /**
+         * Retrieves the message sent to the receiver when they accept a TPA request.
+         *
+         * @return the TPA accept receiver message template.
+         */
+        public String tpaAcceptReceiver() {
+            return this.tpaAcceptReceiver;
+        }
+
+        /**
+         * Sets the message sent to the receiver when they accept a TPA request.
+         *
+         * @param tpaAcceptReceiver the TPA accept receiver message template.
+         */
+        public void tpaAcceptReceiver(final String tpaAcceptReceiver) {
+            this.tpaAcceptReceiver = tpaAcceptReceiver;
+        }
+
+        /**
+         * Retrieves the message sent to the sender when their TPA request is declined.
+         *
+         * @return the TPA decline sender message template.
+         */
+        public String tpaDeclineSender() {
+            return this.tpaDeclineSender;
+        }
+
+        /**
+         * Sets the message sent to the sender when their TPA request is declined.
+         *
+         * @param tpaDeclineSender the TPA decline sender message template.
+         */
+        public void tpaDeclineSender(final String tpaDeclineSender) {
+            this.tpaDeclineSender = tpaDeclineSender;
+        }
+
+        /**
+         * Retrieves the message sent to the receiver when they decline a TPA request.
+         *
+         * @return the TPA decline receiver message template.
+         */
+        public String tpaDeclineReceiver() {
+            return this.tpaDeclineReceiver;
+        }
+
+        /**
+         * Sets the message sent to the receiver when they decline a TPA request.
+         *
+         * @param tpaDeclineReceiver the TPA decline receiver message template.
+         */
+        public void tpaDeclineReceiver(final String tpaDeclineReceiver) {
+            this.tpaDeclineReceiver = tpaDeclineReceiver;
         }
     }
 }

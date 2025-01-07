@@ -5,9 +5,11 @@ A simple teleport plugin for the [Sponge](https://spongepowered.org/) server sof
 - [x] `/tp` command
 - [ ] `/tpa` system
   - [ ] Send TP requests to another person
-  - [ ] Accept TP requests from another person
+    - [x] `/tpa` command
+    - [ ] `/tpahere` command
+  - [x] Accept TP requests from another person
   - [ ] List current TP requests
-  - [ ] TP request expiration
+  - [x] TP request expiration
      
 ### Possible Features
 - [ ] Teleport request cooldown

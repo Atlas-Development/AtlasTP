@@ -1,10 +1,15 @@
 package dev.atlasmc.atlastp;
 
 import com.google.inject.Inject;
+import dev.atlasmc.atlastp.commands.TPACommand;
+import dev.atlasmc.atlastp.commands.TPAResponseCommand;
 import dev.atlasmc.atlastp.commands.TPCommand;
 import dev.atlasmc.atlastp.config.AtlasTPConfig;
+import dev.atlasmc.atlastp.manager.MapTPAManager;
+import dev.atlasmc.atlastp.util.TPAManagerUtil;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.api.Server;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.Command;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.entity.living.player.server.ServerPlayer;
@@ -35,6 +40,8 @@ public class AtlasTP {
 
     private ValueReference<AtlasTPConfig, CommentedConfigurationNode> config;
 
+    private TPAManagerUtil tpaManagerUtil;
+
     @Inject
     AtlasTP(final PluginContainer container, final Logger logger, final @DefaultConfig(sharedRoot = true) ConfigurationReference<CommentedConfigurationNode> reference) {
         this.container = container;
@@ -51,6 +58,9 @@ public class AtlasTP {
         this.logger.info("Loading configuration");
         this.config = this.reference.referenceTo(AtlasTPConfig.class);
         this.reference.save();
+
+        this.logger.info("Setting up the TPManager");
+        this.tpaManagerUtil = new TPAManagerUtil(Sponge.pluginManager().fromInstance(this).orElseThrow(), new MapTPAManager<>());
     }
 
     @Listener
@@ -79,6 +89,42 @@ public class AtlasTP {
                     .executor(new TPCommand(logger, config.get())).build(),
                 "tp",
                 "teleport"
+        );
+
+        event.register(
+                this.container,
+                Command.builder()
+                        .addParameter(TPACommand.getToPlayer())
+                        .executionRequirements(context -> context.cause().root() instanceof ServerPlayer)
+                        .permission("atlastp.command.tpa")
+                        .executor(new TPACommand(logger, config.get(), tpaManagerUtil)).build(),
+                "tpa",
+                "tpask"
+        );
+
+        // TPAResponse commands
+        event.register(
+                this.container,
+                Command.builder()
+                        .addParameter(TPAResponseCommand.selectedPlayer())
+                        .executionRequirements(context -> context.cause().root() instanceof ServerPlayer)
+                        .permission("atlastp.command.tparesponse.tpaccept")
+                        .executor(new TPAResponseCommand.TPAllowCommand(logger, config.get(), tpaManagerUtil)).build(),
+                "tpaccept",
+                "tpaaccept",
+                "tpallow"
+        );
+
+        event.register(
+                this.container,
+                Command.builder()
+                        .addParameter(TPAResponseCommand.selectedPlayer())
+                        .executionRequirements(context -> context.cause().root() instanceof ServerPlayer)
+                        .permission("atlastp.command.tparesponse.tpdeny")
+                        .executor(new TPAResponseCommand.TPDenyCommand(logger, config.get(), tpaManagerUtil)).build(),
+                "tpdeny",
+                "tpadeny",
+                "tpareject"
         );
     }
 }
