@@ -75,7 +75,7 @@ public final class TPCommand implements CommandExecutor {
 
         if(player.equals(toPlayer)) {
             context.sendMessage(MiniMessage.miniMessage().deserialize(
-                    config.translationStrings().tpaToSelf(),
+                    config.translationStrings().tpToSelf(),
                     Placeholder.component("player", player.displayName().get())
             ));
             return CommandResult.success();
