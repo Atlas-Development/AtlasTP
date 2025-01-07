@@ -17,7 +17,7 @@ import org.spongepowered.api.entity.living.player.server.ServerPlayer;
  * Supports teleporting a player to another player or teleporting one player to another
  * by a third-party executor.
  */
-public class TPCommand implements CommandExecutor {
+public final class TPCommand implements CommandExecutor {
 
     /**
      * Represents the parameter for the first player.
