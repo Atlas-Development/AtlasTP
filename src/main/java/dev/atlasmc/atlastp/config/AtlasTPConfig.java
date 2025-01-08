@@ -40,6 +40,14 @@ public class AtlasTPConfig {
     @Comment("The different translation strings for player messages.")
     private @NonNull TranslationStrings translationStrings = new TranslationStrings();
 
+    @Comment("""
+                The amount of time (in ticks) a TPA request should be valid.
+                
+                This value is specified in game ticks (1/20th of a second).
+                n minutes can be calculated as "n * 60 * 20".
+                """)
+    private long tpaExpireTime = 3 * 60 * 20;
+
     /**
      * Retrieves the current configuration version.
      *
@@ -75,6 +83,24 @@ public class AtlasTPConfig {
      */
     public void translationStrings(final @NonNull TranslationStrings translationStrings) {
         this.translationStrings = translationStrings;
+    }
+
+    /**
+     * Retrieves the time (in game ticks) for a TPA request (how long it should be active)
+     *
+     * @return the amount of time
+     */
+    public long tpaExpireTime() {
+        return this.tpaExpireTime;
+    }
+
+    /**
+     * Sets the time (in game ticks) for a TPA request (how long it should be active)
+     *
+     * @param tpaExpireTime the amount of time
+     */
+    public void tpaExpireTime(final long tpaExpireTime) {
+        this.tpaExpireTime = tpaExpireTime;
     }
 
     /**

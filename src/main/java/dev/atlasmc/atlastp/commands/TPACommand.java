@@ -61,7 +61,7 @@ public final class TPACommand implements CommandExecutor {
                 sendingPlayer.uniqueId(),
                 receivingPlayer.uniqueId(),
                 TPAManager.TPADirection.TO_RECEIVER,
-                3 * 60 * 20,
+                config.tpaExpireTime(),
                 (senderID, receiverID) -> {
                     Sponge.server().player(senderID)
                             .ifPresent(serverPlayer -> serverPlayer.sendMessage(MiniMessage.miniMessage().deserialize(
