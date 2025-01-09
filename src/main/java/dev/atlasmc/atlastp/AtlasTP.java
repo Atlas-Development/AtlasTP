@@ -94,12 +94,23 @@ public class AtlasTP {
         event.register(
                 this.container,
                 Command.builder()
-                        .addParameter(TPACommand.getToPlayer())
+                        .addParameter(TPACommand.TPARequestCommand.getToPlayer())
                         .executionRequirements(context -> context.cause().root() instanceof ServerPlayer)
                         .permission("atlastp.command.tpa")
-                        .executor(new TPACommand(logger, config.get(), tpaManagerUtil)).build(),
-                "tpa",
-                "tpask"
+                        .executor(new TPACommand.TPARequestCommand(logger, config.get(), tpaManagerUtil)).build(),
+                "tpask",
+                "tpa"
+        );
+
+        event.register(
+                this.container,
+                Command.builder()
+                        .addParameter(TPACommand.TPAHereCommand.getToPlayer())
+                        .executionRequirements(context -> context.cause().root() instanceof ServerPlayer)
+                        .permission("atlastp.command.tpahere")
+                        .executor(new TPACommand.TPAHereCommand(logger, config.get(), tpaManagerUtil)).build(),
+                "tpahere",
+                "tpah"
         );
 
         // TPAResponse commands

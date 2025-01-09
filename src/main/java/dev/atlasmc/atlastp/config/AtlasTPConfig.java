@@ -202,6 +202,23 @@ public class AtlasTPConfig {
                 "To accept, type /tpaccept <fromplayer> and to reject, type /tpdeny <fromplayer>.";
 
         @Comment("""
+                Message to the player that sends the TPAHere request.
+                
+                Allows for <fromplayer> (Name of the player that sends the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String tpaHereSendMessage = "Sending teleport request to <toplayer> (<toplayer> -> you).";
+
+        @Comment("""
+                Message to the player that receives the TPAHere request.
+                
+                Allows for <fromplayer> (Name of the player that has sent the request)
+                and <toplayer> (Name of the player that receives request)
+                """)
+        private String tpaHereReceiveMessage = "You got a teleport request from <fromplayer> (you -> <fromplayer>).\n" +
+                "To accept, type /tpaccept <fromplayer> and to reject, type /tpdeny <fromplayer>.";
+
+        @Comment("""
                 Message to the sender when the teleport request expires.
                 
                 Allows for <fromplayer> (Name of the player that has sent the request)
@@ -399,6 +416,42 @@ public class AtlasTPConfig {
          */
         public void tpaReceiveMessage(final String tpaReceiveMessage) {
             this.tpaReceiveMessage = tpaReceiveMessage;
+        }
+
+        /**
+         * Retrieves the message sent to the sender when they send a TPAHere request.
+         *
+         * @return the TPAHere send message template.
+         */
+        public String tpaHereSendMessage() {
+            return this.tpaHereSendMessage;
+        }
+
+        /**
+         * Sets the message sent to the sender when they send a TPAHere request.
+         *
+         * @param tpaHereSendMessage the TPAHere send message template.
+         */
+        public void tpaHereSendMessage(final String tpaHereSendMessage) {
+            this.tpaHereSendMessage = tpaHereSendMessage;
+        }
+
+        /**
+         * Retrieves the message sent to the receiver when they receive a TPAHere request.
+         *
+         * @return the TPAHere receive message template.
+         */
+        public String tpaHereReceiveMessage() {
+            return this.tpaHereReceiveMessage;
+        }
+
+        /**
+         * Sets the message sent to the receiver when they receive a TPAHere request.
+         *
+         * @param tpaHereReceiveMessage the TPAHere receive message template.
+         */
+        public void tpaHereReceiveMessage(final String tpaHereReceiveMessage) {
+            this.tpaHereReceiveMessage = tpaHereReceiveMessage;
         }
 
         /**

@@ -4,9 +4,9 @@ A simple teleport plugin for the [Sponge](https://spongepowered.org/) server sof
 ## Features (TODO)
 - [x] `/tp` command
 - [ ] `/tpa` system
-  - [ ] Send TP requests to another person
+  - [x] Send TP requests to another person
     - [x] `/tpa` command
-    - [ ] `/tpahere` command
+    - [x] `/tpahere` command
   - [x] Accept TP requests from another person
   - [ ] List current TP requests
   - [x] TP request expiration
