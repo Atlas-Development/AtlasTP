@@ -36,8 +36,18 @@ public class MapTPAManager<T> implements TPAManager<T> {
 
     @Override
     public @NonNull Collection<TPARequest<T>> removeRequestsBySender(final @NonNull UUID sender) {
-        // TODO
-        return List.of();
+        final List<TPARequest<T>> list = new ArrayList<>();
+
+        for(final Map<UUID, TPARequest<T>> map : tpaMap.values()) {
+            final TPARequest<T> request = map.remove(sender);
+            
+            if (request == null)
+                continue;
+
+            list.add(request);
+        }
+
+        return list;
     }
 
     @Override
