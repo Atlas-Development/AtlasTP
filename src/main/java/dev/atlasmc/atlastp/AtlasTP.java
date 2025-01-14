@@ -57,6 +57,21 @@ public class AtlasTP {
 
         this.logger.info("Loading configuration");
         this.config = this.reference.referenceTo(AtlasTPConfig.class);
+
+        if(this.config.get().version() != 0) {
+            this.logger.error(() -> String.format(
+                        "The config version was expected to be 0, but got %d. This version does not exist.",
+                        this.config.get().version()
+                    )
+            );
+
+            this.logger.error("The version of the config should NOT be changed.");
+
+            // Throwing an exception so that the plugin gets removed from the plugin list
+            // and a large red message is being sent, which alarms the user.
+            throw new RuntimeException("Invalid version provided. The plugin cannot recover.");
+        }
+
         this.reference.save();
 
         this.logger.info("Setting up the TPManager");
