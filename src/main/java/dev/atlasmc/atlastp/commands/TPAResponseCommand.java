@@ -93,6 +93,8 @@ public abstract class TPAResponseCommand implements CommandExecutor {
                     toPlayer
             ));
 
+            logger.info("{} accepted the TPA request by {}.", commandSender.user().name(), player.user().name());
+
             return CommandResult.success();
         }
     }
@@ -132,6 +134,8 @@ public abstract class TPAResponseCommand implements CommandExecutor {
                     fromPlayer,
                     toPlayer
             ));
+
+            logger.info("{} denied the TPA request by {}.", commandSender.user().name(), player.user().name());
 
             return CommandResult.success();
         }

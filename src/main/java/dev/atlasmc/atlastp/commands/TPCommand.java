@@ -91,7 +91,7 @@ public final class TPCommand implements CommandExecutor {
                 Placeholder.component("toplayer", toPlayer.displayName().get())
         ));
 
-        logger.info("Teleporting " + player.user().name() + " to " + toPlayer.user().name());
+        logger.info("Teleporting {} to {}.", player.user().name(), toPlayer.user().name());
 
         return CommandResult.success();
     }
@@ -138,7 +138,12 @@ public final class TPCommand implements CommandExecutor {
             ));
         }
 
-        logger.info("Teleporting " + player.user().name() + " to " + toPlayer.user().name() + " (teleported by " + ((ServerPlayer) context.cause().root()).user().name() + ")");
+        logger.info(
+                "Teleporting {} to {} (teleported by {})",
+                player.user().name(),
+                toPlayer.user().name(),
+                ((ServerPlayer) context.cause().root()).user().name()
+        );
 
         return CommandResult.success();
     }

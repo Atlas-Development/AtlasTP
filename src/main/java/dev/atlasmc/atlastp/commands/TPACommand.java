@@ -86,6 +86,8 @@ public abstract class TPACommand implements CommandExecutor {
                 }
         );
 
+        logger.info("TPA request sent by {} to {}.", sendingPlayer.user().name(), receivingPlayer.user().name());
+
         return afterCommandExecute(sendingPlayer, fromPlayer, receivingPlayer, toPlayer);
     }
 
